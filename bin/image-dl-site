@@ -1,0 +1,38 @@
+#!/usr/bin/env node
+const fs = require('fs');
+const path = require('path');
+const cwd = process.cwd();
+const version = require(path.join(__dirname, '../package.json')).version;
+const download = require('../index.js');
+
+let program = require('commander')
+    .version(version)
+    .usage('[options] <urls ...>')
+    .option('-o, --output <dirname>', 'the output dirname, or filename when download single image file')
+    .option('-c, --config <filepath>', 'the configuration filepath')
+    // TODO filename
+    .parse(process.argv);
+
+let options = {};
+
+if (program.config) {
+    let configPath = path.resolve(cwd, program.config);
+    if (fs.existsSync(configPath)) {
+        Object.assign(options, require(configPath));
+    } else {
+        console.error(program.config + ': not found');
+        process.exit(1);
+    }
+}
+
+if (program.output) {
+    options.output = program.output;
+}
+options.output = options.output || './';
+
+if (program.args.length) {
+    options.urls = program.args;
+}
+options.urls = options.urls || [];
+
+download(options, true);

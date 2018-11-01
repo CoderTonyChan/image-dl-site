@@ -1,0 +1,32 @@
+{
+  "name": "image-dl-site",
+  "version": "0.1.0",
+  "description": "node cli for downloading images in some site.",
+  "main": "index.js",
+  "bin": {
+    "image-dl-site": "./bin/image-dl-site"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CTLifeHand/image-dl-site.git"
+  },
+  "keywords": [
+    "download",
+    "images",
+    "batch"
+  ],
+  "author": "TonyChan <codertonychan@icloud.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CTLifeHand/image-dl-site/issues"
+  },
+  "homepage": "https://github.com/CTLifeHand/image-dl-site#readme",
+  "dependencies": {
+    "commander": "^2.11.0",
+    "mkdirp": "^0.5.1",
+    "request": "^2.83.0"
+  }
+}
