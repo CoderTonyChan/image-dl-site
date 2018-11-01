@@ -10,6 +10,8 @@ let program = require('commander')
     .usage('[options] <urls ...>')
     .option('-o, --output <dirname>', 'the output dirname, or filename when download single image file')
     .option('-c, --config <filepath>', 'the configuration filepath')
+    .option('-m, --meizitu <id>', '下载妹子图的post') // 下载妹子图的post
+    .option('-n, --nheitai <id>', '下载nheitai的图片') // 下载妹子图的post
     // TODO filename
     .parse(process.argv);
 
@@ -28,6 +30,17 @@ if (program.config) {
 if (program.output) {
     options.output = program.output;
 }
+
+if (program.meizitu) {
+    options.meizitu = program.meizitu;
+}
+// console.log(options.meizitu);
+// console.log(program.meizitu);
+
+if (program.nheitai) {
+    options.nheitai = program.nheitai;
+}
+
 options.output = options.output || './';
 
 if (program.args.length) {

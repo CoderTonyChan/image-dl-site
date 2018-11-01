@@ -4,8 +4,20 @@ const request = require('request');
 const mkdirp = require('mkdirp');
 const cwd = process.cwd();
 
-function download (options, showLog, cb) {
+const { getMeizituList } = require('./routes/meizitu/util');
+
+async function download (options, showLog, cb) {
+    console.log(options);
+    
     options = preprocessOptions(options, showLog);
+
+    console.log(options);
+    // 增加option
+    if (options.meizitu) {
+        options.urls = await getMeizituList(options.meizitu);
+        console.log(options.urls);
+    }
+
     if (options === null) return;
 
     let allDone = (function () {
@@ -16,8 +28,6 @@ function download (options, showLog, cb) {
             callback();
         }
     })();
-
-    // 增加option
 
     showLog && console.log('downloading...')
     let isSingle = options.urls.length === 1;
@@ -48,7 +58,7 @@ function download (options, showLog, cb) {
 function preprocessOptions (options, showLog) {
     let opts = Object.assign({}, options);
 
-    if (!opts.urls || !opts.urls.length) return null;
+    // if (!opts.urls || !opts.urls.length) return null;
 
     opts.output = path.resolve(cwd, opts.output);
     opts.filename = null;
