@@ -5,17 +5,17 @@ const mkdirp = require('mkdirp');
 const cwd = process.cwd();
 
 const { getMeizituList } = require('./routes/meizitu/util');
+const { getHentaiDetail } = require('./routes/nhentai/util');
 
 async function download (options, showLog, cb) {
-    console.log(options);
-    
     options = preprocessOptions(options, showLog);
-
-    console.log(options);
     // 增加option
     if (options.meizitu) {
         options.urls = await getMeizituList(options.meizitu);
-        console.log(options.urls);
+    } else if (options.nhentai) {
+        const urls = await getHentaiDetail(options.nhentai);
+        options.urls = urls;
+        console.log(urls);
     }
 
     if (options === null) return;
