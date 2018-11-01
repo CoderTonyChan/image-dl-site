@@ -13,9 +13,9 @@ async function download (options, showLog, cb) {
     if (options.meizitu) {
         options.urls = await getMeizituList(options.meizitu);
     } else if (options.nhentai) {
-        const urls = await getHentaiDetail(options.nhentai);
-        options.urls = urls;
-        console.log(urls);
+        const detail = await getHentaiDetail(options.nhentai);
+        options.urls = detail.urls;
+        console.log(detail);
     }
 
     if (options === null) return;

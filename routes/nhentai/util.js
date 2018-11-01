@@ -14,7 +14,8 @@ exports.getList = async (url) => {
 
 
 exports.getHentaiDetail = async (id) => {
-    const { data } = await axios.get(`https://nhentai.net/g/${id}/`);
+    const url = `https://nhentai.net/g/${id}/`;
+    const { data } = await axios.get(url);
     const $ = cheerio.load(data);
 
     // thumb to high-quality
@@ -23,7 +24,12 @@ exports.getHentaiDetail = async (id) => {
         .get();
     galleryThumbs = galleryThumbs.map((src) => src.replace(/(.+)(\d+)t\.(.+)/, (_, p1, p2, p3) => `${p1}${p2}.${p3}`));
     galleryThumbs = galleryThumbs.map((src) => src.replace('t.nhentai.net', 'i.nhentai.net'));
-    return galleryThumbs;
+    return {
+        title: $('div#info > h2').text() || $('div#info > h1').text(),
+        pubDate: new Date($('time').attr('datetime')).toUTCString(),
+        guid: `full:${url}`,
+        urls: galleryThumbs,
+    };
 };
 
 
