@@ -1,13 +1,15 @@
 {
   "name": "image-dl-site",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "node cli for downloading images in some site.",
   "main": "index.js",
   "bin": {
     "image-dl-site": "./bin/image-dl-site"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "npm publish .",
+    "debug": "npm link"
   },
   "repository": {
     "type": "git",

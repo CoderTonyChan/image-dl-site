@@ -6,6 +6,17 @@
 npm install --global image-dl-site
 ```
 
+### debug
+
+```shell
+npm link
+```
+
+### deploy
+```shell
+npm publish .
+```
+
 ### Options
 
 ``image-dl-site [options]``，后面可带多个 url，url 需要用引号包括起来。
